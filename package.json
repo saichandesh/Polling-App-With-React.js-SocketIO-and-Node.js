@@ -1,0 +1,35 @@
+{
+  "name": "polling-app-with-react.js-and-socketio",
+  "version": "1.0.0",
+  "description": "This application will allow a speaker to start a presentation, and interact with audience members by asking questions and graphing their responses.",
+  "main": "app-server.js",
+  "scripts": {
+    "prestart": "webpack",
+    "start": "node app-server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/saichandesh/Polling-App-With-React.js-and-SocketIO.git"
+  },
+  "keywords": [
+    "socketIO",
+    "React.js",
+    "Node.js"
+  ],
+  "author": "saichandesh gurramkonda",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/saichandesh/Polling-App-With-React.js-and-SocketIO/issues"
+  },
+  "homepage": "https://github.com/saichandesh/Polling-App-With-React.js-and-SocketIO#readme",
+  "devDependencies": {
+    "babel-core": "^6.17.0",
+    "babel-loader": "^6.2.5",
+    "babel-preset-react": "^6.16.0",
+    "bootstrap": "^3.3.7",
+    "express": "^4.14.0",
+    "react": "^15.3.2",
+    "react-dom": "^15.3.2",
+    "webpack": "^1.13.2"
+  }
+}

@@ -1,0 +1,7 @@
+### Application ###
+
+# Dependency directories
+node_modules
+
+#webpack bundles
+webpack_bundle
