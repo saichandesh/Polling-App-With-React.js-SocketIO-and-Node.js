@@ -3,7 +3,7 @@ var React = require('react');
 var Header = React.createClass({
 
 	propsTypes: {
-		title: React.PropTypes.String
+		presentation_title: React.PropTypes.String
 	},
 
 	getDefaultProps() {
@@ -15,12 +15,8 @@ var Header = React.createClass({
 	render(){
 		return (
 					<header className="row">
-						<div className="col-xs-10">
-							<h1>{this.props.title}</h1>
-						</div>
-						<div className="col-xs-2">
-							<span id="connection-status" className={this.props.status}>{this.props.status}</span>
-						</div>
+							<h1>{this.props.presentation_title}</h1>
+							<p>{this.props.speaker}</p>
 					</header>
 				);
 	}
