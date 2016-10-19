@@ -11,7 +11,8 @@ module.exports = {
 				loader: "babel",
 				query:
 			      {
-			        presets:["react"]
+			        presets:["react"],
+			        compact: false
 			      }
 			}
 		]

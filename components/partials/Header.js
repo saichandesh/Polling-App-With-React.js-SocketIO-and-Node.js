@@ -1,5 +1,7 @@
 var React = require('react');
 
+var Display = require('./Display');
+
 var Header = React.createClass({
 
 	propsTypes: {
@@ -13,11 +15,19 @@ var Header = React.createClass({
 	},
 
 	render(){
-		return (
-					<header className="row">
-							<h1>{this.props.presentation_title}</h1>
-							<p>{this.props.speaker}</p>
-					</header>
+		return (	
+					<nav className="navbar navbar-inverse">
+						<div className="container-fluid">
+							<div className="navbar-header">
+								<a className="navbar-brand">
+									<h2>{this.props.presentation_title}</h2>
+									<Display if={this.props.speaker!=''}>
+										<span>Speaker - {this.props.speaker}</span>
+									</Display>
+								</a>
+							</div>
+						</div>
+					</nav>
 				);
 	}
 });

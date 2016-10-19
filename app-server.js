@@ -4,9 +4,10 @@ var _ = require('underscore');
 
 var app = express();
 var connections = [];
-var presentation_title = 'Untitled';
+var presentation_title = 'Untitled Presentation';
 var audiences = [];
 var speaker = {};
+var questions = [];
 
 app.use(express.static("./node_modules/bootstrap/dist"));
 app.use(express.static("./"));
@@ -26,7 +27,7 @@ io.sockets.on('connection', function(socket){
 			audiences.splice(audiences.indexOf(member),1);
 			io.sockets.emit('updateAudience', audiences);
 		}else if(this.id == speaker.id){
-			presentation_title = 'Untitled';
+			presentation_title = 'Untitled Presentation';
 			speaker = {};
 			io.sockets.emit('end',{presentation_title: presentation_title , speaker : ''});
 		}
@@ -57,7 +58,19 @@ io.sockets.on('connection', function(socket){
 	socket.emit('welcome', {
 		presentation_title : presentation_title,
 		audiences : audiences,
-		speaker : speaker.name
+		speaker : speaker.name,
+		questions : questions
+	});
+
+	socket.on('askquestion', function(question){
+		question.results = [0,0,0,0];
+		questions.push(question);
+		io.sockets.emit('askquestion',questions);
+	});
+
+	socket.on('sendAnswer', function(payLoad){
+		questions[payLoad.questionNumber-1].results[payLoad.answer]++;
+		io.sockets.emit('results',questions);
 	});
 
 	connections.push(socket);

@@ -1,0 +1,21 @@
+.table>tbody>tr>td {
+	cursor: pointer;
+}
+
+.btn{
+	text-align: left;
+	margin: 1vh;
+}
+
+.navbar-brand{
+	height: 15vh;
+}
+
+.navbar-inverse .navbar-brand{
+	color: white;
+}
+
+#datacontainer{
+	margin-left: 3vw;
+	margin-right: 3vw;
+}

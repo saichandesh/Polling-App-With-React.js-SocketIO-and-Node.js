@@ -1,6 +1,7 @@
 var React = require('react');
 var Link = require('react-router').Link;
 
+
 var JoinSpeaker = require('./partials/JoinSpeaker');
 var Display = require('./partials/Display');
 var Attendance = require('./partials/Attendance');
@@ -13,6 +14,12 @@ var Speaker = React.createClass({
 						<Display if={this.props.status == 'connected'}>
 							<Display if={this.props.Memeber.name && this.props.Memeber.type == 'speaker'} >
 								<h2>Welcome {this.props.Memeber.name}</h2>
+								<p>
+									<Link to="/askquestion">Ask a Question</Link>
+								</p>
+								<p>
+									<Link to="/questions">Go to Board</Link>
+								</p>
 								<Display if={this.props.updateAudiences.length>0}>
 									<Attendance updateAudiences={this.props.updateAudiences} />
 								</Display>

@@ -2,6 +2,8 @@ var React = require('react');
 var ReactDOM = require('react-dom');
 var Link = require('react-router').Link;
 
+var Display =require('./Display');
+
 var JoinForm = React.createClass({
 
 	submit() {
@@ -18,7 +20,9 @@ var JoinForm = React.createClass({
 							   placeholder = "Enter your name"
 							   required /><br/>
 					    <button className="btn btn-primary">submit</button>&nbsp;
-					    <Link to="/speaker">Start the presentation</Link>
+					    <Display if={this.props.speakername==''}>
+					    	<Link to="/speaker">Start the presentation</Link>
+					    </Display>
 					</form>
 			   );
 	}
