@@ -1,18 +1,8 @@
-var React = require('react');
+import React from 'react'
 
-var Display = require('./Display');
+import Display from './Display'
 
-var Header = React.createClass({
-
-	propsTypes: {
-		presentation_title: React.PropTypes.String
-	},
-
-	getDefaultProps() {
-		return {
-			status : 'disconnected'
-		}
-	},
+class Header extends React.Component {
 
 	render(){
 		return (	
@@ -30,6 +20,14 @@ var Header = React.createClass({
 					</nav>
 				);
 	}
-});
+}
+
+Header.PropTypes = {
+	presentation_title: React.PropTypes.String
+};
+
+Header.deafaultProps = {
+	status : 'disconnected'
+};
 
 module.exports = Header;

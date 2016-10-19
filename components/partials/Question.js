@@ -1,10 +1,16 @@
-var React = require('react');
+import React from 'react'
 
-var Question = React.createClass({
+class Question extends React.Component {
+
+	constructor(){
+		super();
+		this.SendResponse = this.SendResponse.bind(this);
+		this.showAnswers = this.showAnswers.bind(this);
+	}
 
 	SendResponse(response) {
 		this.props.emit('sendAnswer' , {answer : response, questionNumber : this.props.questions.length});
-	},
+	}
 
 	showAnswers(answer,i){
 		var buttonTypes = ['primary', 'success', 'warning', 'danger'];
@@ -15,7 +21,7 @@ var Question = React.createClass({
 						{i+1} - {answer}
 				</button>
 			  );
-	},
+	}
 
 	render() {
 		return(
@@ -28,6 +34,6 @@ var Question = React.createClass({
 					</div>
 			  );
 	}
-});
+}
 
 module.exports = Question;

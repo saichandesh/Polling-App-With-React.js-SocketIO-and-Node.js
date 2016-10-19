@@ -1,10 +1,15 @@
-var React = require('react');
-var ReactDOM = require('react-dom');
-var Router = require('react-router');
+import React from 'react'
+import ReactDOM from 'react-dom'
+import Router from 'react-router'
 
-var Display = require('./partials/Display');
+import Display from './partials/Display'
 
-var AskQuestion = React.createClass({
+class AskQuestion extends React.Component {
+
+	constructor(){
+		super();
+		this.submitQuestion = this.submitQuestion.bind(this);
+	}
 
 	submitQuestion() {
 		var question = {};
@@ -17,7 +22,7 @@ var AskQuestion = React.createClass({
 
 		this.props.emit('askquestion',question);
 		 window.location = "/#/speaker";
-	},
+	}
 
 	render() {
 		return (
@@ -55,6 +60,6 @@ var AskQuestion = React.createClass({
 					</div>
 			   );
 	}
-});
+}
 
 module.exports = AskQuestion;

@@ -1,14 +1,20 @@
-var React = require('react');
-var Link = require('react-router').Link;
+import React from 'react'
+import {Link} from 'react-router'
 
-var Display = require('./partials/Display');
+import Display from './partials/Display'
 
-var DisplayQuestions = React.createClass({
+class DisplayQuestions extends React.Component {
+
+	constructor(){
+		super();
+		this.showResponse = this.showResponse.bind(this);
+		this.selectquestion = this.selectquestion.bind(this);
+	}
 
 	showResponse(question){
 		this.props.emit('boardResponse',{selectedQuestion: question});
 		window.location = "/#/board";
-	},
+	}
 
 	selectquestion(question, i){
 		return(
@@ -16,7 +22,7 @@ var DisplayQuestions = React.createClass({
 						<td>{i+1}. {question.ques}</td>
 					</tr>
 			  );
-	},
+	}
 
 	render(){
 		return (
@@ -45,6 +51,6 @@ var DisplayQuestions = React.createClass({
 
 			   );
 	}
-});
+}
 
 module.exports = DisplayQuestions;

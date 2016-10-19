@@ -1,10 +1,10 @@
-var React = require('react');
+import React from 'react'
 
-var Display = require('./partials/Display');
-var JoinForm = require('./partials/JoinForm');
-var Question = require('./partials/Question');
+import Display from './partials/Display'
+import JoinForm from './partials/JoinForm'
+import Question from './partials/Question'
 
-var Audience = React.createClass({
+class Audience extends React.Component {
 
 	render(){
 		var name = 'question '+ this.props.questions.length;
@@ -40,6 +40,6 @@ var Audience = React.createClass({
 
 			   );
 	}
-});
+}
 
 module.exports = Audience;

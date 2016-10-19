@@ -1,9 +1,9 @@
-var React = require('react');
-var BarChart = require('react-d3').BarChart;
+import React from 'react'
+import {BarChart} from 'react-d3'
 
-var Display = require('./partials/Display');
+import Display from './partials/Display'
 
-var Board = React.createClass({
+class Board extends React.Component {
 
 	barGraphData(results){
 		var chartData = [];
@@ -17,7 +17,7 @@ var Board = React.createClass({
 			i++;
 		});
 		return chartData;
-	},
+	}
 
 	render(){
 		return (
@@ -36,6 +36,6 @@ var Board = React.createClass({
 
 			   );
 	}
-});
+}
 
 module.exports = Board;

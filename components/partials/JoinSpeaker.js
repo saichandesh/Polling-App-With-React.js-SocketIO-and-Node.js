@@ -1,14 +1,19 @@
-var React = require('react');
-var ReactDOM = require('react-dom');
-var Link = require('react-router').Link;
+import React from 'react'
+import ReactDOM from 'react-dom'
+import {Link} from 'react-router'
 
-var JoinSpeaker = React.createClass({
+class JoinSpeaker extends React.Component {
+
+	constructor(){
+		super();
+		this.start = this.start.bind(this);
+	}
 
 	start() {
 		var speaker = ReactDOM.findDOMNode(this.refs.name).value;
 		var titlename = ReactDOM.findDOMNode(this.refs.title).value;
 		this.props.emit('start', {name : speaker, presentationtitle : titlename});
-	},
+	}
 
 	render() {
 		return (
@@ -27,6 +32,6 @@ var JoinSpeaker = React.createClass({
 					</form>
 			   );
 	}
-});
+}
 
 module.exports = JoinSpeaker;

@@ -1,14 +1,15 @@
-var React = require('react');
-var io = require('socket.io-client');
-var Router = require('react-router');
+import React from 'react'
+import io from 'socket.io-client'
+import Router from 'react-router'
+import Header from './partials/Header'
+
 var RouteHandler = Router.RouteHandler;
 
-var Header = require('./partials/Header');
+class APP extends React.Component {
 
-var APP = React.createClass({
-
-	getInitialState(){
-		return {
+	constructor(){
+		super();
+		this.state = {
 			status : 'disconnected',
 			presentation_title : '',
 			Memeber : {},
@@ -17,22 +18,43 @@ var APP = React.createClass({
 			questions: [],
 			answered : 'no',
 			selectedQuestion : 0
-		}
-	},
+		};
+		this.emit = this.emit.bind(this);
+	}
 
 	componentWillMount(){
 		this.socket = io('http://localhost:8080');
-		this.socket.on('connect', this.connect);
-		this.socket.on('disconnect', this.disconnect);
-		this.socket.on('welcome',this.updateState);
-		this.socket.on('joined',this.joined);
-		this.socket.on('updateAudience', this.updatedAudience);
-		this.socket.on('speakerStarted',this.speakerStarted);
-		this.socket.on('end',this.updateState);
-		this.socket.on('askquestion',this.askQuestion);
-		this.socket.on('answer',this.updateState);
-		this.socket.on('results',this.updateResult);
-	},
+		this.socket.on('connect', () => {
+			var memeber = (sessionStorage.Memeber) ? JSON.parse(sessionStorage.Memeber) : null;
+			if(memeber && memeber.type == 'audience'){
+				this.emit('join',memeber);
+			} else if(memeber && memeber.type == 'speaker'){
+				this.emit('start', {name: memeber.name, presentationtitle: JSON.parse(sessionStorage.presentationTitle)});
+			}
+			this.setState({ status : 'connected'});
+		});
+		this.socket.on('disconnect', () => this.setState({ status : 'disconnected'}));
+		this.socket.on('welcome',(x) => this.setState(x));
+		this.socket.on('joined',(newMember) => {
+			sessionStorage.Memeber = JSON.stringify(newMember);
+			this.setState({Memeber : newMember});
+		});
+		this.socket.on('updateAudience', (audiences) => {
+			this.setState({updateAudiences : audiences});
+		});
+		this.socket.on('speakerStarted',(title,audiences,speakerName) => {
+			this.setState({presentation_title : title, updateAudiences:audiences, speaker:speakerName});
+			sessionStorage.presentationTitle = JSON.stringify(title);
+		});
+		this.socket.on('end',(x) => this.setState(x));
+		this.socket.on('askquestion',(questionsFromServer) => {
+			this.setState({questions : questionsFromServer, answered : 'no'});
+		});
+		this.socket.on('answer',(x) => this.setState(x));
+		this.socket.on('results',(data) => {
+			this.setState({ questions:data });
+		});
+	}
 
 	emit(eventName, payLoad){
 		if(eventName=='boardResponse'){
@@ -44,46 +66,7 @@ var APP = React.createClass({
 			}
 			this.socket.emit(eventName,payLoad);
 		}
-	},
-
-	connect(){
-		var memeber = (sessionStorage.Memeber) ? JSON.parse(sessionStorage.Memeber) : null;
-		if(memeber && memeber.type == 'audience'){
-			this.emit('join',memeber);
-		} else if(memeber && memeber.type == 'speaker'){
-			this.emit('start', {name: memeber.name, presentationtitle: JSON.parse(sessionStorage.presentationTitle)});
-		}
-		this.setState({ status : 'connected'});
-	},
-
-	disconnect(){
-		this.setState({ status : 'disconnected'});
-	},
-
-	joined(newMember) {
-		sessionStorage.Memeber = JSON.stringify(newMember);
-		this.setState({Memeber : newMember});
-	},
-
-	updatedAudience(audiences){
-		this.setState({updateAudiences : audiences});
-	},
-
-	speakerStarted(title,audiences,speakerName) {
-		this.setState({presentation_title : title, updateAudiences:audiences, speaker:speakerName});
-		sessionStorage.presentationTitle = JSON.stringify(title);
-	},
-	updateState(serverState) {
-		this.setState(serverState);
-	},
-
-	askQuestion(questionsFromServer) {
-		this.setState({questions : questionsFromServer, answered : 'no'});
-	},
-
-	updateResult(data){
-		this.setState({ questions:data });
-	},
+	}
 
 	render(){
 		return (
@@ -95,6 +78,6 @@ var APP = React.createClass({
 					</div>
 				);
 	}
-});
+}
 
 module.exports = APP;

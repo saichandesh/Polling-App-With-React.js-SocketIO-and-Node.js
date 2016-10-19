@@ -1,7 +1,7 @@
-var React = require('react');
-var Router = require('react-router');
-var Link = Router.Link;
-var Error404 = React.createClass({
+import React from 'react'
+import {Link} from 'react-router'
+
+class Error404 extends React.Component {
 
 	render(){
 		return (
@@ -16,6 +16,6 @@ var Error404 = React.createClass({
 
 			   );
 	}
-});
+}
 
 module.exports = Error404;

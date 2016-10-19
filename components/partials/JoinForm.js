@@ -1,15 +1,20 @@
-var React = require('react');
-var ReactDOM = require('react-dom');
-var Link = require('react-router').Link;
+import React from 'react'
+import ReactDOM from 'react-dom'
+import {Link} from 'react-router'
 
-var Display =require('./Display');
+import Display from './Display'
 
-var JoinForm = React.createClass({
+class JoinForm extends React.Component {
+
+	constructor(){
+		super();
+		this.submit = this.submit.bind(this);
+	}
 
 	submit() {
 		var memeberName = ReactDOM.findDOMNode(this.refs.name).value;
 		this.props.emit('join', {name : memeberName});
-	},
+	}
 
 	render() {
 		return (
@@ -26,6 +31,6 @@ var JoinForm = React.createClass({
 					</form>
 			   );
 	}
-});
+}
 
 module.exports = JoinForm;

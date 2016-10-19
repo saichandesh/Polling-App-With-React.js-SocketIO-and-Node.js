@@ -1,12 +1,11 @@
-var React = require('react');
-var Link = require('react-router').Link;
+import React from 'react'
+import {Link} from 'react-router'
 
+import JoinSpeaker from './partials/JoinSpeaker'
+import Display from './partials/Display'
+import Attendance from './partials/Attendance'
 
-var JoinSpeaker = require('./partials/JoinSpeaker');
-var Display = require('./partials/Display');
-var Attendance = require('./partials/Attendance');
-
-var Speaker = React.createClass({
+class Speaker extends React.Component {
 
 	render(){
 		return (
@@ -37,6 +36,6 @@ var Speaker = React.createClass({
 					</div>
 			   );
 	}
-});
+}
 
 module.exports = Speaker;
