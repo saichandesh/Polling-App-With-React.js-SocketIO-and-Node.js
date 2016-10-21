@@ -1,4 +1,4 @@
-# Polling-App-With-React.js-and-SocketIO
+# Polling-App-With-React.js-SocketIO-and-Node.js
 This application will allow a speaker to start a presentation, and interact with audience members by asking questions and graphing their responses. 
 
 ##TO Get Started
